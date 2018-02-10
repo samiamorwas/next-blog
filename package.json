@@ -1,0 +1,36 @@
+{
+  "name": "create-next-example-app",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently \"next\" \"yarn prettier-watch\"",
+    "build": "next build",
+    "start": "next start",
+    "prettier-watch": "onchange '**/*.js' -- prettier --write {{changed}}"
+  },
+  "dependencies": {
+    "next": "^4.2.3",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "styled-components": "^3.1.4",
+    "styled-normalize": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "babel-plugin-styled-components": "^1.5.0",
+    "concurrently": "^3.5.1",
+    "eslint": "^4.16.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-react": "^7.6.1",
+    "onchange": "^3.3.0",
+    "prettier": "^1.10.2",
+    "stylelint": "^8.4.0",
+    "stylelint-config-standard": "^18.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-custom-processor-loader": "^0.4.0",
+    "stylelint-processor-styled-components": "^1.2.2",
+    "typescript": "^2.6.2"
+  }
+}
