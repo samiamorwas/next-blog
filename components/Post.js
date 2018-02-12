@@ -1,54 +1,42 @@
 import React from 'react';
 import PropType from 'prop-types';
-import styled from 'styled-components';
 
-const Title = styled.h2`
-  font-size: 40px;
-  font-family: ${props => props.theme.header};
-  color: ${props => props.theme.primary};
+import Paragraph from './Paragraph';
+import PostTitle from './PostTitle';
 
-  ::selection {
-    background: ${props => props.theme.ultraHighlight};
-  }
-
-  ::-moz-selection {
-    background: ${props => props.theme.ultraHighlight};
-  }
-`;
-
-const Paragraph = styled.p`
-  font-size: 20px;
-  font-family: ${props => props.theme.main};
-  line-height: 1.5;
-  color: ${props => props.theme.black};
-
-  ::selection {
-    background: ${props => props.theme.ultraHighlight};
-  }
-
-  ::-moz-selection {
-    background: ${props => props.theme.ultraHighlight};
-  }
-`;
+const componentTypeMap = {
+  paragraph: Paragraph
+};
 
 const Post = ({ content }) => (
   <article>
     <header>
-      <Title>{content.title}</Title>
+      <PostTitle>{content.title}</PostTitle>
     </header>
     <section>
-      {content.paragraphs.map(paragraph => (
-        <Paragraph key={content.id}>{paragraph}</Paragraph>
-      ))}
+      {content.elements.map(element => {
+        const ElementComponent = componentTypeMap[element.type];
+        return (
+          <ElementComponent key={element.id}>
+            {element.content}
+          </ElementComponent>
+        );
+      })}
     </section>
   </article>
 );
 
 Post.propTypes = {
   content: PropType.shape({
-    id: PropType.number,
-    title: PropType.string,
-    paragraphs: PropType.arrayOf(PropType.string)
+    id: PropType.number.isRequired,
+    title: PropType.string.isRequired,
+    elements: PropType.arrayOf(
+      PropType.shape({
+        id: PropType.number.isRequired,
+        type: PropType.string.isRequired,
+        content: PropType.node.isRequired
+      })
+    )
   })
 };
 
